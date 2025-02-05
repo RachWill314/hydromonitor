@@ -13,6 +13,7 @@
 #include <Adafruit_Sensor.h>
 #include "DHT.h"
 #include <FastLED.h>
+#include <Adafruit_NeoPixel.h>
 
 
 #ifndef _WIFI_H 
@@ -227,22 +228,28 @@ void callback(char* topic, byte* payload, unsigned int length) {
 
   if (strcmp(type, "controls") == 0){
     // 1. EXTRACT ALL PARAMETERS: NODES, RED,GREEN, BLUE, AND BRIGHTNESS FROM JSON OBJECT
-    int nodes = doc["nodes"];
-    int red = doc["red"];
-    int green = doc["green"];
-    int blue = doc["blue"];
+    int nodes = doc["leds"];
+    JsonDocument color = doc ["color"];
+    int red = color["r"];
+    int green = color["g"];
+    int blue = color["b"];
     int brightness = doc["brightness"];
 
     // 2. ITERATIVELY, TURN ON LED(s) BASED ON THE VALUE OF NODES. Ex IF NODES = 2, TURN ON 2 LED(s)
     for(int i = 0; i < nodes; i++){
       leds[i] = CRGB(red,green,blue);
+      FastLED.setBrightness(brightness);
+      FastLED.show();
+      delay(50);
     }
-    FastLED.show(); // DISPLAY LED(s)
+
+    Serial.println("Should be showing");
     // 3. ITERATIVELY, TURN OFF ALL REMAINING LED(s).
     for(int i = nodes; i < NUM_LEDS; i++){
-      leds[i] = CRGB(0,0,0);
+      leds[i] = CRGB(0, 0, 0);
+        FastLED.show();
+      delay(50);
     }
-    FastLED.show(); // DISPLAY LED(s)
    
   }
 }
