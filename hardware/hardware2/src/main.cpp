@@ -290,7 +290,7 @@ double calcHeatIndex(double Temp, double Humid){
   double c5 = -6.83783e-3, c6 = -5.481717e-2, c7 = 1.22874e-3, c8 = 8.5282e-4, c9 = -1.99e-6;
   double fTemp = convert_Celsius_to_fahrenheit(Temp);
     
-  return c1 + (c2 * fTemp) + (c3 * Humid) + (c4 * fTemp * Humid) + (c5 * fTemp * Temp) + (c6 * Humid * Humid) + (c7 * fTemp * fTemp * Humid) + (c8 * fTemp * Humid * Humid) + (c9 * fTemp * fTemp * Humid * Humid);
+  return c1 + (c2 * fTemp) + (c3 * Humid) + (c4 * fTemp * Humid) + (c5 * fTemp * fTemp) + (c6 * Humid * Humid) + (c7 * fTemp * fTemp * Humid) + (c8 * fTemp * Humid * Humid) + (c9 * fTemp * fTemp * Humid * Humid);
 }
  
 

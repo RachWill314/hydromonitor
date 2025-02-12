@@ -192,7 +192,7 @@ class DB:
             result      = list(remotedb.ELET2415.climo.aggregate( [
     {
         '$match': {
-            f'{variable}': {
+            f'timestamp': {
                 '$gte': float(start), 
                 '$lte': float(end)
             }
@@ -204,7 +204,7 @@ class DB:
                 x for x in range(0,101)], 
             'default': 'outliers', 
             'output': {
-                'count ': {
+                'count': {
                     '$sum': 1
                 }
             }

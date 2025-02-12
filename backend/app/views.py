@@ -84,6 +84,7 @@ def get_freq_distro(variable,start,end):
    
     if request.method == "GET": 
         data = mongo.frequencyDistro(variable,start,end)
+        print(data)
         if data:
             return jsonify({"status":"found","data":data})
         else:
