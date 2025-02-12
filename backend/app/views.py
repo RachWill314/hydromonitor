@@ -31,7 +31,12 @@ def get_all(start,end):
    
     if request.method == "GET":
         '''Add your code here to complete this route'''
-
+        data = mongo.getAllInRange(start,end)
+        if data:
+            return jsonify({"status":"found","data":data})
+        else:
+            return jsonify({"status":"not found","data":[]})
+        
     # FILE DATA NOT EXIST
     return jsonify({"status":"not found","data":[]})
    
@@ -42,7 +47,11 @@ def get_temperature_mmar(start,end):
     '''RETURNS MIN, MAX, AVG AND RANGE FOR TEMPERATURE. THAT FALLS WITHIN THE START AND END DATE RANGE'''
    
     if request.method == "GET": 
-        '''Add your code here to complete this route'''
+        data = mongo.temperatureMMAR(start,end)
+        if data:
+            return jsonify({"status":"found","data":data})
+        else:
+            return jsonify({"status":"not found","data":[]})
 
     # FILE DATA NOT EXIST
     return jsonify({"status":"not found","data":[]})
@@ -56,7 +65,11 @@ def get_humidity_mmar(start,end):
     '''RETURNS MIN, MAX, AVG AND RANGE FOR HUMIDITY. THAT FALLS WITHIN THE START AND END DATE RANGE'''
    
     if request.method == "GET": 
-        '''Add your code here to complete this route'''
+        data = mongo.humidityMMAR(start,end)
+        if data:
+            return jsonify({"status":"found","data":data})
+        else:
+            return jsonify({"status":"not found","data":[]})
 
     # FILE DATA NOT EXIST
     return jsonify({"status":"not found","data":[]})
@@ -70,7 +83,11 @@ def get_freq_distro(variable,start,end):
     '''RETURNS FREQUENCY DISTRIBUTION FOR SPECIFIED VARIABLE'''
    
     if request.method == "GET": 
-        '''Add your code here to complete this route'''         
+        data = mongo.frequencyDistro(variable,start,end)
+        if data:
+            return jsonify({"status":"found","data":data})
+        else:
+            return jsonify({"status":"not found","data":[]})       
 
     # FILE DATA NOT EXIST
     return jsonify({"status":"not found","data":[]})
